@@ -30,6 +30,10 @@ public class CurrencyExchangeController {
         if (exchangeValue == null) {
             return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
         }
+        String port = env.getProperty("local.server.port");
+        if (port != null) {
+            exchangeValue.setPort(Integer.parseInt(port));
+        }
         return new ResponseEntity<>(exchangeValue, HttpStatus.OK);
     }
 }
