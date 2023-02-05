@@ -2,6 +2,7 @@ package com.armando.gennaro.zadolinnyi.microservices.currencyexchangeservice.con
 
 import com.armando.gennaro.zadolinnyi.microservices.currencyexchangeservice.entity.ExchangeValue;
 import com.armando.gennaro.zadolinnyi.microservices.currencyexchangeservice.jpa.ExchangeValueRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/")
+@Slf4j
 public class CurrencyExchangeController {
 
     @Autowired
@@ -34,6 +36,8 @@ public class CurrencyExchangeController {
         if (port != null) {
             exchangeValue.setPort(Integer.parseInt(port));
         }
+
+        log.info("{}",exchangeValue);
         return new ResponseEntity<>(exchangeValue, HttpStatus.OK);
     }
 }

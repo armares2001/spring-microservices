@@ -2,6 +2,7 @@ package com.armando.gennaro.zadolinnyi.currencyconversionservice.controller;
 
 import com.armando.gennaro.zadolinnyi.currencyconversionservice.entity.CurrencyConversion;
 import com.armando.gennaro.zadolinnyi.currencyconversionservice.feignClient.CurrencyExchangeServiceProxy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
+@Slf4j
 public class CurrencyConversionController {
 
     @Autowired
@@ -48,6 +50,8 @@ public class CurrencyConversionController {
         }
         conversion.setQuantity(q);
         conversion.setTotalCalculatedAmount(q.multiply(conversion.getConversionMultiple()));
+
+        log.info("{}",conversion);
         return new ResponseEntity<>(conversion, HttpStatus.OK);
     }
 }
